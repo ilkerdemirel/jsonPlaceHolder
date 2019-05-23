@@ -1,0 +1,90 @@
+Author : Ilker Demirel
+Date : 23.05.2019
+
+This document is created to explain the details of automation tests written in Python.
+The tests are focused on API testing of two routes ('/albums' and 'users') on 
+https://jsonplaceholder.typicode.com service.
+
+Please follow the instruction below.
+
+*****************************
+1 - Prerequisite
+*****************************
+
+- The tests have been designed in Python 3.7 environment. 
+- Github is used for version controlling.
+- Travis CI is used for continuous integration and deployment.
+
+For Python:
+1. Please download a suitable version -Python 3.7 or later- from https://www.python.org/downloads/
+2. please run commands to install libraries needed;
+	a. pip install requests
+	b. pip install nosetests
+
+For Github
+
+2. Please refer to 'https://github.com/ilkerdemirel/jsonPlaceHolder' for Git details.
+
+For Travis CI
+
+1. Please refer to https://travis-ci.com/ilkerdemirel/jsonPlaceHolder/ for CI testing results.
+It is set as public. Therefore. there is no need to create an account.
+
+Note : Please refer Windows OS as development and testing environment.
+
+*****************************
+2 - How to run the tests
+*****************************
+
+There are 2 ways to run the tests.
+1. Executing test_API.py file and verify results on Console Window.
+2. Executing commands below in command line;
+
+Please execute the commands at the same folder of 'test_API.py' file.
+
+- TO GET THE LIST OF TESTS
+
+nosetests -v --collect-only test_API.py - Lists all the tests.
+
+nosetests -v --collect-only -a functional test_API.py - Lists all the tests with functional attribute.
+
+Available attributes : albums, users, functional, stress, performance
+
+- TO RUN THE TESTS
+
+Default: 
+nosetests -v --with-id test_API.py - Runs all the tests 
+
+nosetests -v --with-id -a stress test_API.py - Runs only the tests with 'stress' attribute.
+
+nosetests -v --with-id --nocapture test_API.py - Runs all the tests with displaying prints/logs in the tests.
+
+nosetests -v --with-id --nocapture test_API.py > result.txt 2>&1 - Runs all the tests with prints/logs and create & put all info to result.txt.
+
+
+
+Note:
+- Travis CI is synced with Github. Therefore, whenever there is a new commit pushed
+to Github repository, CI tests are triggered automatically based on .travis.yml file.
+
+
+*****************************
+3 - Test Case Explanation
+*****************************
+
+Please apply the example below to all tests have been created.
+Note : All the tests have an '@attr' parameter with variables and general explanations of the functionality.
+
+
+@attr('functional', 'albums')
+def test_albums_status_code_funtional():
+    """
+    test_albums_status_code_funtional() - A simple test checks /albums status
+    @parameters : 
+    response_albums.status_code : Status Code from Albums Route
+    STATUS_CODE_200 = OK
+    """
+
+@attr('functional', 'albums') : It means that test can be also runable by using attribute parameters 
+'functional' or 'albums' by selectable via command line execution.
+

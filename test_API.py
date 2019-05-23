@@ -104,17 +104,6 @@ def test_users_status_code_stress():
         print('{}. Response has been gathered..!'.format(i))
         assert response.status_code == STATUS_CODE_200
 
-@attr('performance', 'users')
-def test_users_get_response_time():
-    """
-    test_users_get_response_time() - Verifies response time in TOTAL_NUMBER_PERFORMANCE_LOOP times.
-    """
-    print('Starting test_users_get_response_time test ...')
-    for _ in range(TOTAL_NUMBER_PERFORMANCE_LOOP):
-        response = requests.get(BASE_URL + ROUTE_USERS)
-        print('Response elapsed is : {}'.format(response.elapsed.total_seconds()))
-        assert_true (response.elapsed.total_seconds() <= RESPONSE_TIME)
-
 @attr('functional', 'users')
 def test_users_total_number():
     """
@@ -152,6 +141,17 @@ def test_users_is_email_valid():
     for user in data:
         print('Email of user is : {}'.format(user['email']))
         assert re.match(EMAIL_REGEXP, 'test@test.com')
+
+@attr('performance', 'users')
+def test_users_get_response_time():
+    """
+    test_users_get_response_time() - Verifies response time in TOTAL_NUMBER_PERFORMANCE_LOOP times.
+    """
+    print('Starting test_users_get_response_time test ...')
+    for _ in range(TOTAL_NUMBER_PERFORMANCE_LOOP):
+        response = requests.get(BASE_URL + ROUTE_USERS)
+        print('Response elapsed is : {}'.format(response.elapsed.total_seconds()))
+        assert_true (response.elapsed.total_seconds() <= RESPONSE_TIME)
 
 if __name__ == '__main__':  
     nose.run()
